@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment Management</title>
+  <link rel="stylesheet" href="{% static 'assignments.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
+
+</head>
+<body>
+     <!-- Floating Background Elements -->
+     <div class="floating-element purple"></div>
+     <div class="floating-element blue"></div>
+     <div class="floating-element yellow"></div>
+     
+   
+
+  <a href="{% url 'dashboard' %}" class="close" id="closeBtn">
+    <span class="material-symbols-outlined">close</span> Close
+  </a>
+
+  <div class="main-wrapper">
+    <div class="content-wrapper">
+      <div class="sidebar-left">
+        <button class="side-btn" id="modifyBtn" onclick="showModify()">
+          <span class="material-icons">edit</span>
+          Modify Assessments
+        </button>
+      
+        <button class="side-btn" id="addBtn" onclick="showAdd()">
+          <span class="material-icons">add</span>
+          Add Assessments
+        </button>
+      </div>
+      
+      <div class="content">
+
+        <!-- Modify Section -->
+        <div id="modify-section" class="hidden-section">
+          <h2 id="heading">ADDED ASSESSMENTS</h2>
+          <div class="assessment-box" id="outstanding">
+            <p class="assessment-header">Do my part on Project | Project</p>
+            <p><strong>DETAILS</strong></p>
+            <hr>
+            <p>Due Date: <strong>11/04/2025</strong> &nbsp;&nbsp; <span id="mark" class="right-align">Marks: <strong>Not Available</strong></span></p>
+            <hr>
+            <p>Reaction: Not Available &nbsp;&nbsp; <span class="right-align">Review: Not Available</span></p>
+            <hr>
+            <p>Status: Outstanding</p>
+            <hr>
+            <button class="modify-btn">
+              <span id="modify-icon" class="material-symbols-outlined">
+                box_edit
+              </span>
+              <span class="modify-text">Modify This Assessment</span>
+            </button>
+            
+          </div>
+          <br>
+          <div class="assessment-box" id="on-going">
+            <p class="assessment-header">HCI Assignment | Assignment</p>
+            <p><strong>DETAILS</strong></p>
+            <hr>
+            <p>Due Date: <strong>09/04/2025</strong> &nbsp;&nbsp; <span id="mark" class="right-align">Marks: <strong>Not Available</strong></span></p>
+            <hr>
+            <p>Reaction: Not Available &nbsp;&nbsp; <span class="right-align">Review: Not Available</span></p>
+            <hr>
+            <p>Status: On-Going</p>
+            <hr>
+            <button class="modify-btn">
+              <span id="modify-icon" class="material-symbols-outlined">
+                box_edit
+              </span>
+              <span class="modify-text">Modify This Assessment</span>
+            </button>
+            
+          </div>
+          <br>
+          <div class="assessment-box" id="completed">
+            <p class="assessment-header">SOE Semester Test 1 | Test</p>
+            <p><strong>DETAILS</strong></p>
+            <hr>
+            <p>Due Date: <strong>Wrote</strong> &nbsp;&nbsp; <span id="mark" class="right-align">Marks: <strong>Not Available</strong></span></p>
+            <hr>
+            <p>Reaction: Not Available &nbsp;&nbsp; <span class="right-align">Review: Not Available</span></p>
+            <hr>
+            <p>Status: Completed</p>
+            <hr>
+            <button class="modify-btn">
+              <span id="modify-icon" class="material-symbols-outlined">
+                box_edit
+              </span>
+              <span class="modify-text">Modify This Assessment</span>
+            </button>
+            
+          </div>
+          <br>
+          <div class="assessment-box" id="completed">
+            <p class="assessment-header">HCI Class Test | Test</p>
+            <p><strong>DETAILS</strong></p>
+            <hr>
+            <p>Due Date: <strong>Wrote</strong> &nbsp;&nbsp; <span id="mark" class="right-align">Marks: <strong>82%</strong></span></p>
+            <hr>
+            <p>Reaction: 👍 &nbsp;&nbsp; <span class="right-align">Review: ⭐⭐⭐⭐           </span></p>
+            <hr>
+            <p>Status: Completed</p>
+            <hr>
+            <button class="modify-btn">
+              <span id="modify-icon" class="material-symbols-outlined">
+                box_edit
+              </span>
+              <span class="modify-text">Modify This Assessment</span>
+            </button>
+            
+          </div>
+          <br>
+        </div>
+
+        <!-- Add Section -->
+        <div id="add-section" class="hidden-section">
+          <h2 id="heading">ADD ASSESSMENT</h2>
+          <form action="#" method="POST" class="add-form">
+            <label>Assessment Name:</label>
+            <input type="text" name="name" required>
+
+            <label>Assessment Type:</label>
+            <select name="type" required>
+              <option value="">--Select Type--</option>
+              <option value="Quiz">Quiz</option>
+              <option value="Assignment">Assignment</option>
+              <option value="Project">Project</option>
+              <option value="Test">Test</option>
+              <option value="Exam">Exam</option>
+            </select>
+
+            <label>Assessment Due:</label>
+            <input type="date" name="due" required>
+
+            <label>Module Name:</label>
+            <input type="text" name="module" required>
+
+            <label>Comment:</label>
+            <textarea name="comment" rows="3"></textarea>
+
+            <div class="reminder">
+              <p>When do you want to be reminded about the assessment?</p>
+              <label><input type="radio" name="reminder" value="everyday"> Everyday</label>
+              <label><input type="radio" name="reminder" value="everytwo"> Every Two Day</label>
+            </div>
+
+            <div class="form-actions">
+              <button type="reset" class="reset-btn">
+                <span class="material-symbols-outlined">
+                  restart_alt
+                  </span>Reset
+                </button>
+              <button type="submit" class="save-btn">
+                <span class="material-symbols-outlined">
+                  check
+                  </span>
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showModify() {
+      document.getElementById("modify-section").style.display = "block";
+      document.getElementById("add-section").style.display = "none";
+      setActiveButton('modifyBtn');
+      localStorage.setItem('activeSection', 'modify'); // Save state
+    }
+  
+    function showAdd() {
+      document.getElementById("add-section").style.display = "block";
+      document.getElementById("modify-section").style.display = "none";
+      setActiveButton('addBtn');
+      localStorage.setItem('activeSection', 'add'); // Save state
+    }
+  
+    function setActiveButton(activeId) {
+      document.querySelectorAll('.side-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(activeId).classList.add('active');
+    }
+  
+    window.onload = () => {
+      const lastSection = localStorage.getItem('activeSection');
+  
+      if (lastSection === 'add') {
+        showAdd();
+      } else {
+        showModify(); // default fallback
+      }
+    };
+  </script>
+  
+  
+</body>
+</html>

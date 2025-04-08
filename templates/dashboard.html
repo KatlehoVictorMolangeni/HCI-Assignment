@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dash.css' %}">
+    <!-- Load Material Symbols icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <span class="material-symbols-outlined search-icon">
+                    search
+                </span>
+            </div>
+            <div class="chat-icon-label">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                <span>Chat</span>
+              </div>
+              
+            <span class="material-symbols-outlined" id="notification">
+                notifications
+            </span>
+            <div class="profile">
+                <div class="avatar-initials">
+                    {{ student.name|slice:":1" }}{{ student.surname|slice:":1" }}
+                </div>
+                <span class="username">{{ student.username }}</span>
+            </div>
+        </header>
+
+        <h1 class="welcome">Welcome {{ student.name }} {{ student.surname}}!</h1>
+
+        <div class="cards">
+            <div class="card red">
+                <h2 class="number">01</h2>
+                <p>Outstanding Assessment</p>
+                <span class="material-symbols-outlined">
+                    check_circle
+                </span>
+            </div>
+            <div class="card orange">
+                <h2 class="number">01</h2>
+                <p>On-Going Assessment</p>
+                <span class="material-symbols-outlined">
+                    pending
+                </span>
+            </div>
+            <div class="card green">
+                <h2 class="number">02</h2>
+                <p>Completed Assessments</p>
+                <span class="material-symbols-outlined">
+                    done_all
+                </span>
+            </div>
+            <div class="card blue send" id="sendCard">
+                <i class="fas fa-paper-plane"></i>
+                <span class="material-symbols-outlined" id="sendd">
+                    send
+                </span>
+                <p id="request">Request Assistance</p>
+            </div>
+            <div id="messageBox" class="message-box">No One Available To Assist</div>
+            <div class="card purple btn">
+                <a href="{% url 'manage' %}" class="btn-link">
+                    <span class="material-symbols-outlined">add_circle</span> Add Assessment
+                </a>
+
+                <a href="{% url 'quotes' %}" class="btn-link">
+                    <span class="material-symbols-outlined">visibility</span> View Quotes
+                </a>
+
+                <a href="{% url 'study' %}" class="btn-link">
+                    <span class="material-symbols-outlined">book_5</span> My Study Plan
+                </a>                         
+            </div>
+        </div>
+
+        <section class="task-overview">
+            <h2>Assessment Overview</h2>
+            <div class="tabs">
+                <button class="active">All Assessments</button>
+                <button>Outstanding Assessments</button>
+                <button>On-Going Assessments</button>
+                <button>Completed Assessments</button>
+            </div>
+
+            <div class="task-list">
+                <div class="task-item border-red">
+                    <p><strong>Do My Part On Project</strong> | Project <span class="badge red">OUTSTANDING</span></p>
+                    <div class="details">
+                        <p>Due: <strong>11/04/2025</strong></p>
+                    </div>
+                    <p class="small">I have to do the project management part | Ghantt Chart</p>
+                </div>
+
+                <div class="task-item border-orange">
+                    <p><strong>HCI Assignemnt</strong> | Assignemnt <span class="badge orange">ON-GOING</span></p>
+                    <div class="details">
+                        <p>Due: <strong>11/04/2025</strong></p>
+                        <p>Progress: 70% Done </p>
+                    </div>
+                    <p class="small">Building The Django Project(Wireframe), And Documentation </p>
+                </div>
+
+                <div class="task-item border-green">
+                    <p><strong>SOE Semester Test 1</strong> | Test <span class="badge green">COMPLETED</span></p>
+                    <div class="details">
+                        <p>Marks: <strong>NOT MARKED</strong></p>
+                        <p id="request">Reaction: Not Available</p>
+                        <p id="request">Review: Not Available</p>
+                    </div>
+                    <p class="small">I am really nervous for this test, but i tried all i can.</p>
+                </div>
+
+                <div class="task-item border-green">
+                    <p><strong>HCI Class Test</strong> | Test <span class="badge green">COMPLETED</span></p>
+                    <div class="details">
+                        <p>Marks: <strong>82%</strong></p>
+                        <p id="complete">Reaction: 👍</p>
+                        <p >Review: ⭐⭐⭐⭐</p>
+                    </div>
+                    <p class="small">Test Was Not Bad, Although There Are Things That I Left, But I tried</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const sendCard = document.getElementById("sendCard");
+        const messageBox = document.getElementById("messageBox");
+
+        sendCard.addEventListener("mouseover", function(event) {
+            // Show the message box when the cursor is over the card
+            messageBox.style.display = "block";
+            messageBox.style.left = `${event.pageX + 10}px`; // Position message box next to the cursor (10px right)
+            messageBox.style.top = `${event.pageY + 10}px`;  // Position message box below the cursor (10px down)
+        });
+
+        sendCard.addEventListener("mouseleave", function() {
+            // Hide the message box when the mouse leaves the card
+            messageBox.style.display = "none";
+        });
+    </script>
+</body>
+</html>

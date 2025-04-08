@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Navigation Bar -->
+<header class="absolute top-0 left-0 w-full z-50">
+    <nav class="flex items-center justify-between px-6 py-4 text-white">
+        <!-- Logo -->
+        <a href="#">
+            <img src="static/spu.png" alt="Logo" class="h-12 md:h-16">
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="hidden md:flex space-x-8 text-purple-700 relative">
+            <li><a href="#" class="hover:text-gray-300 transition duration-300">Home</a></li>
+
+            <!-- Features Dropdown -->
+            <li class="relative group">
+                <button class="flex items-center hover:text-gray-300 transition duration-300">
+                    Features
+                    <svg class="w-5 h-5 ml-1 transition-transform duration-300 group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            
+                <ul class="absolute left-0 mt-3 w-60 bg-white text-gray-900 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 scale-95 group-hover:scale-100 py-2 border border-gray-200">
+                    <li><a href="#" class="block px-6 py-3 text-gray-600 text-lg font-medium hover:bg-gray-100 rounded-lg transition">📌 Task Management</a></li>
+                    <li><a href="#" class="block px-6 py-3 text-gray-600 text-lg font-medium hover:bg-gray-100 rounded-lg transition">⏳ Reminders & Deadlines</a></li>
+                    <li><a href="#" class="block px-6 py-3 text-gray-600 text-lg font-medium hover:bg-gray-100 rounded-lg transition">📅 Smart Study Plans</a></li>
+                </ul>
+            </li>
+            
+
+            <li><a href="#" class="hover:text-gray-300 transition duration-300">Pricing</a></li>
+            <li><a href="#" class="hover:text-gray-300 transition duration-300">Contact</a></li>
+            <li>
+                <a href="{% url 'login' %}" class="px-4 py-2 text-sm font-medium text-blue bg-ivory-600 rounded-lg hover:bg-blue-700 hover:text-white transition">
+                    Login
+                </a>
+            </li>
+
+        </ul>
+        
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden focus:outline-none">
+            ☰
+        </button>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<div class="relative flex flex-col md:flex-row items-center justify-center min-h-screen bg-blue-50 text-center p-10 overflow-hidden">
+    <!-- Floating Background Elements -->
+    <div class="absolute top-14 left-10 w-6 h-6 bg-purple-500 rounded-full opacity-70 animate-float"></div>
+    <div class="absolute top-20 right-32 w-5 h-5 bg-blue-400 rounded-full opacity-80 animate-float"></div>
+    <div class="absolute bottom-10 left-1/4 w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-float"></div>
+    <div class="absolute bottom-20 right-1/3 w-4 h-4 bg-green-500 rounded-full opacity-75 animate-float"></div>
+    <div class="absolute top-19 right-1/2 w-10 h-10 bg-indigo-400 rounded-full opacity-80 animate-float"></div>
+
+    <!-- Text Section -->
+    <div class="relative md:w-1/2 text-left px-6">
+        <h1 class="text-7xl font-bold text-purple-700 leading-tight">
+            Stay Organized. Stay Ahead.
+        </h1>
+        <p class="mt-4 text-gray-600 text-lg max-w-md">
+            Manage your assignments efficiently with reminders, deadlines, and smart study planning.
+        </p>
+        <a href="{% url 'login' %}" 
+        id="login-btn"
+        class="mt-6 inline-block px-6 py-3 text-lg rounded-full bg-blue-600 text-white hover:bg-blue-700 transition duration-300">
+        <span id="login-text">Go To Sign In →</span>
+     </a>
+     
+    </div>
+
+    <!-- Illustration Section -->
+    <div class="relative md:w-1/2 flex justify-center mt-6 md:mt-0">
+        <img src="static/Task-amico.png" alt="Task Illustration" class="w-80 md:w-full max-w-md">
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('login-btn');
+      const text = document.getElementById('login-text');
+  
+      // Always reset button text on page load
+      text.innerHTML = 'Go To Sign In →';
+  
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); // Optional: allows time for feedback before navigating
+  
+        let dotCount = 1;
+        text.innerHTML = 'Redirecting to sign-in.';
+  
+        const interval = setInterval(() => {
+          dotCount = (dotCount % 3) + 1;
+          text.innerHTML = 'Redirecting' + '.'.repeat(dotCount);
+        }, 400);
+  
+        // After short delay, go to login page
+        setTimeout(() => {
+          clearInterval(interval);
+          window.location.href = btn.href;
+        }, 1500); // adjust delay if needed
+      });
+    });
+  </script>
+  
+  
+
+{% endblock %}

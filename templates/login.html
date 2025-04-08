@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle,lock" />
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-element purple"></div>
+    <div class="floating-element blue"></div>
+    <div class="floating-element yellow"></div>
+    <div class="floating-element green"></div>
+    <div class="floating-element indigo"></div>
+
+    <div class="container">
+        <div class="login-box">
+            <div class="login-image">
+                <img src="{% static 'login.png' %}" alt="Login Illustration">
+            </div>
+            <div class="login-form">
+                <h2>Enter Your Credentials</h2>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="input-container">
+                        {{ form.username }} <!-- Render username field from form -->
+                        <span class="material-symbols-outlined username-icon">account_circle</span>
+                    </div>
+                    
+                    <div class="input-container">
+                        {{ form.password }} <!-- Render password field from form -->
+                        <span class="material-symbols-outlined password-icon">lock</span>
+                    </div>
+                    
+                    <button type="submit">Login</button>
+                </form>
+
+                <!-- Display error messages -->
+                {% if error %}
+                    <div class="error-messages">
+                        <p style="color: red;">{{ error }}</p>
+                    </div>
+                {% endif %}
+
+                <!-- Display form errors if any -->
+                {% if form.errors %}
+                    <div class="error-messages">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <div class="links">
+                    <a id="forgot-password" href="#">Forgot your password?</a><br>
+                    <a id="get-help" href="#">Get help Signing in.</a>
+                </div>
+                
+                <p class="terms">Terms of use • Privacy policy</p>
+            </div>
+        </div>
+    
