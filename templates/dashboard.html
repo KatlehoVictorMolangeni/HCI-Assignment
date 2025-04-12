@@ -31,10 +31,12 @@
                     {{ student.name|slice:":1" }}{{ student.surname|slice:":1" }}
                 </div>
                 <span class="username">{{ student.username }}</span>
+                <a class="logout" href="{% url 'login'%}"><span>|</span> Logout</a>
             </div>
         </header>
 
         <h1 class="welcome">Welcome {{ student.name }} {{ student.surname}}!</h1>
+        
 
         <div class="cards">
             <div class="card red">

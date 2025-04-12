@@ -51,3 +51,6 @@ def view_quotes(request):
 
 def study_plane(request):
     return render(request, 'study.html')
+
+def register(request):
+    return render(request, 'register.html')

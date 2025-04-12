@@ -1,11 +1,146 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'motivation.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
     <title>Quotes</title>
 </head>
 <body>
-    <h1>Your Quotes</h1>
+    <!-- Floating Background Elements -->
+    <div class="floating-element purple"></div>
+    <div class="floating-element blue"></div>
+    <div class="floating-element yellow"></div>
+
+    <a href="{% url 'dashboard' %}" class="close" id="closeBtn">
+        <span class="material-symbols-outlined">close</span> Close
+    </a>
+    
+    <div class="motivation-container">
+        <div class="sectionn">
+            <h1>We got you, Katleho!</h1>
+            <p>Here's your dose of motivation to power through the week!</p>
+        </div>
+
+        <div class="section">
+            <h3>Your Weekly Progress</h3>
+            <p>Tasks Completed: 2/4</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 67%;"></div>
+            </div>
+            <p class="icon-text">
+                <span class="material-symbols-outlined">lock_open_right</span>
+                Next Milestone: Motivation Champion Badge
+            </p>
+        </div>
+
+        <div class="section">
+            <h3>Today's Quote</h3>
+            <blockquote>
+                "Success is the sum of small efforts repeated day in and day out." – Robert Collier
+            </blockquote>
+            
+            <div class="quote-buttons">
+                <button class="icon-button"><span class="material-symbols-outlined">favorite</span>Save Quote</button>
+                <button class="icon-button"><span class="material-symbols-outlined">cached</span>New Quote</button>
+            </div>
+            
+            <hr>
+            
+            <p>Listen To One Of The Weekly Motivation From <strong>Dr Eric Thomas</strong></p>
+            
+            <div class="audio-player">
+                <audio id="myAudio">
+                    <source src="{% static 'motivation.mp3' %}" type="audio/mpeg">
+                </audio>
+                
+                <button id="playPauseBtn" class="audio-control"><span class="material-icons">play_arrow</span></button>
+                <input type="range" id="progressBar" class="progress-slider" value="0">
+                <span id="timeDisplay" class="time-display">0:00 / 0:00</span>
+                <button id="muteBtn" class="audio-control"><span class="material-icons">volume_up</span></button>
+                <input type="range" id="volumeControl" class="volume-slider" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="icon-text">
+                <span class="material-symbols-outlined">rocket_launch</span>
+                Quick Challenge
+            </h3>
+            <p class="challenge-text">🎯 Take a 10-minute break & plan your next task!</p>
+            <button class="icon-button"><span class="material-symbols-outlined">check</span>I Did It!</button>
+        </div>
+
+        <div class="section">
+            <h3 class="icon-text"><span class="material-symbols-outlined">chat</span>From Fellow Students</h3>
+            <p>"Sticking to this app helped me manage deadlines." – Nthabiseng 💪</p>
+            <p>"Reminders keep me on track!" – Ayanda 🎯</p>
+            <button class="share-button icon-button">
+                <span class="material-symbols-outlined">mark_chat_read</span>
+                Share your motivation moment
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const muteBtn = document.getElementById('muteBtn');
+        const volumeControl = document.getElementById('volumeControl');
+        const playIcon = playPauseBtn.querySelector('.material-icons');
+        const muteIcon = muteBtn.querySelector('.material-icons');
+
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.textContent = 'pause';
+            } else {
+                audio.pause();
+                playIcon.textContent = 'play_arrow';
+            }
+        });
+
+        // Progress bar
+        audio.addEventListener('timeupdate', () => {
+            progressBar.value = (audio.currentTime / audio.duration) * 100;
+            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        });
+
+        progressBar.addEventListener('input', () => {
+            audio.currentTime = (progressBar.value / 100) * audio.duration;
+        });
+
+        volumeControl.addEventListener('input', () => {
+            audio.volume = volumeControl.value;
+            if (audio.volume == 0) {
+                muteIcon.textContent = 'volume_off';
+                audio.muted = true;
+            } else {
+                muteIcon.textContent = audio.muted ? 'volume_off' : 'volume_up';
+            }
+        });
+
+        // Mute toggle
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            muteIcon.textContent = audio.muted ? 'volume_off' : 'volume_up';
+            if (!audio.muted && audio.volume == 0) {
+                audio.volume = 1;
+                volumeControl.value = 1;
+            }
+        });
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+    </script>
 </body>
 </html>

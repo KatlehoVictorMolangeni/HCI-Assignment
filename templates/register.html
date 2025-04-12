@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+    <!-- Load Material Symbols (Outlined) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-element purple"></div>
+    <div class="floating-element blue"></div>
+    <div class="floating-element yellow"></div>
+    <div class="floating-element green"></div>
+    <div class="floating-element indigo"></div>
+    <nav class="navbar">
+        <a href="#">
+            <img src="{% static 'spu.png' %}" alt="Logo" class="logo">
+        </a>
+    </nav>
+    
+    <div class="container">
+        <div class="login-box">
+            <div class="login-image">
+                <img src="{% static 'register.png' %}" alt="Register Illustration">
+            </div>
+            <div class="login-form">
+                <h2>Register Your Credentials</h2>
+                <form>
+
+                    <div class="input-container">
+                        <input type="text" placeholder="Enter name">
+                        <span class="material-symbols-outlined username-icon">account_circle</span>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="text" placeholder="Enter surname">
+                        <span class="material-symbols-outlined username-icon">account_circle</span>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="text" placeholder="Enter student number">
+                        <span class="material-symbols-outlined username-icon">pin</span>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="email" placeholder="Enter email">
+                        <span class="material-symbols-outlined username-icon">mail</span>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="password" placeholder="Enter password">
+                        <span class="material-symbols-outlined password-icon">lock</span>
+                    </div>
+
+                    <button type="submit">Register</button>
+                </form>
+                
+
+                <p class="terms">Terms of use • Privacy policy</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

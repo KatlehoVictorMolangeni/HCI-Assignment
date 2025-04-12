@@ -119,9 +119,10 @@
         </div>
 
         <!-- Add Section -->
+        
         <div id="add-section" class="hidden-section">
           <h2 id="heading">ADD ASSESSMENT</h2>
-          <form action="#" method="POST" class="add-form">
+          <form class="add-form">
             <label>Assessment Name:</label>
             <input type="text" name="name" required>
 
@@ -152,15 +153,10 @@
 
             <div class="form-actions">
               <button type="reset" class="reset-btn">
-                <span class="material-symbols-outlined">
-                  restart_alt
-                  </span>Reset
-                </button>
+                <span class="material-symbols-outlined">restart_alt</span>Reset
+              </button>
               <button type="submit" class="save-btn">
-                <span class="material-symbols-outlined">
-                  check
-                  </span>
-                Save
+                <span class="material-symbols-outlined">check</span>Save
               </button>
             </div>
           </form>
@@ -174,31 +170,39 @@
       document.getElementById("modify-section").style.display = "block";
       document.getElementById("add-section").style.display = "none";
       setActiveButton('modifyBtn');
-      localStorage.setItem('activeSection', 'modify'); // Save state
+      localStorage.setItem('activeSection', 'modify');
     }
-  
+
     function showAdd() {
       document.getElementById("add-section").style.display = "block";
       document.getElementById("modify-section").style.display = "none";
       setActiveButton('addBtn');
-      localStorage.setItem('activeSection', 'add'); // Save state
+      localStorage.setItem('activeSection', 'add');
     }
-  
+
     function setActiveButton(activeId) {
       document.querySelectorAll('.side-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       document.getElementById(activeId).classList.add('active');
     }
-  
+
     window.onload = () => {
       const lastSection = localStorage.getItem('activeSection');
-  
       if (lastSection === 'add') {
         showAdd();
       } else {
-        showModify(); // default fallback
+        showModify();
       }
+
+      // Handle simulated "Save"
+      const form = document.querySelector('.add-form');
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); // prevent page reload
+        alert("✅ Assessment has been successfully added!");
+        form.reset(); // optional: clear the form after confirmation
+        
+      });
     };
   </script>
   
