@@ -54,3 +54,6 @@ def study_plane(request):
 
 def register(request):
     return render(request, 'register.html')
+
+def saved(request):
+    return render(request, 'saved.html')

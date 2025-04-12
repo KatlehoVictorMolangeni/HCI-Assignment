@@ -11,4 +11,5 @@ urlpatterns = [
     path('quotes', views.view_quotes, name='quotes'),
     path('study-plan', views.study_plane, name='study'),
     path('register/', views.register, name='register'),
+    path('added/',views.saved, name='added'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

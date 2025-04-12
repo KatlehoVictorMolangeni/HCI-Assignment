@@ -199,7 +199,7 @@
       const form = document.querySelector('.add-form');
       form.addEventListener('submit', function(e) {
         e.preventDefault(); // prevent page reload
-        alert("✅ Assessment has been successfully added!");
+        window.open('added')
         form.reset(); // optional: clear the form after confirmation
         
       });
